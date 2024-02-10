@@ -1,0 +1,3 @@
+npm install jsonwebtoken - ус библетотеки jsonwebtoken
+npm install mongoose - ус биб мангус
+npm install express-validator - ус биб express-validator проверка ошибок
