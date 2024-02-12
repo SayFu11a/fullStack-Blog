@@ -1,12 +1,18 @@
 import express from 'express';
-// import { restart } from 'nodemon';
-import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 
+// import { restart } from 'nodemon';
+
 import { registerValidation } from './validations/auth.js';
+import checkAuth from './utils/checkAuth.js';
+import * as UserController from './controllers/UserController.js'; // все методы из UserController.js сохрани в перемен UserController
+
+// import User from './models/User.js';
 
 mongoose
-   .connect('mongodb+srv://admin1:wwwwww@cluster0.okaofvn.mongodb.net/?retryWrites=true&w=majority')
+   .connect(
+      'mongodb+srv://admin1:wwwwww@cluster0.okaofvn.mongodb.net/blog?retryWrites=true&w=majority',
+   )
    .then(() => console.log('DB ok'))
    .catch((err) => console.log('DB error', err));
 
@@ -14,7 +20,11 @@ const app = express();
 
 app.use(express.json()); // чтобы читать джейсон запросы.
 
-app.post('/auth/register', (req, res) => {}); //  если придет пост запрос вернуть сексес тру
+app.post('/auth/login', UserController.login);
+
+app.post('/auth/register', registerValidation, UserController.register); //  если придет пост запрос вернуть сексес тру, регистрация
+
+app.get('/auth/me', checkAuth, UserController.getMe);
 
 app.listen(4444, (err) => {
    if (err) {
