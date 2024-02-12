@@ -11,12 +11,12 @@ export default (req, res, next) => {
          next(); // выполни следующее все нормально
       } catch (e) {
          res.status(403).json({
-            message: 'Нет доступа',
+            message: 'Нет доступа123',
          });
       }
    } else {
       res.status(403).json({
-         message: 'Нет доступа',
+         message: 'Нет доступа nen',
       });
    }
 
