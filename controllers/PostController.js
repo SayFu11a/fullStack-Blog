@@ -52,6 +52,43 @@ export const getOne = async (req, res) => {
    }
 };
 
+export const remove = async (req, res) => {
+   try {
+      const postId = req.params.id;
+
+      PostModel.findOneAndDelete(
+         {
+            _id: postId,
+         },
+         {
+            returnDocument: 'after',
+         },
+      ).then((doc, err) => {
+         if (err) {
+            console.log(err);
+            return res.status(500).json({
+               message: 'Не получается удалить статью.',
+            });
+         }
+
+         if (!doc) {
+            return res.status(404).json({
+               message: 'Article not found.',
+            });
+         }
+
+         res.json({
+            success: true,
+         });
+      });
+   } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+         message: 'Не удалось получить статьи',
+      });
+   }
+};
+
 export const create = async (req, res) => {
    try {
       const doc = new PostModel({
