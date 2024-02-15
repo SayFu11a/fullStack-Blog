@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import multer from 'multer';
 
 // import { restart } from 'nodemon';
 
@@ -19,6 +20,17 @@ mongoose
 
 const app = express();
 
+const storage = multer.diskStorage({
+   destination: (_, __, cb) => {
+      cb(null, 'uploads');
+   },
+   filename: (_, file, cb) => {
+      cb(null, file.originalname);
+   },
+});
+
+const upload = multer({ storage }); // у мультера храниище сделали стородж
+
 app.use(express.json()); // чтобы читать джейсон запросы.
 
 app.post('/auth/login', loginValidation, UserController.login);
@@ -29,7 +41,7 @@ app.get('/posts', PostController.getAll);
 app.get('/posts/:id', PostController.getOne);
 app.post('/posts', checkAuth, postCreateValidation, PostController.create);
 app.delete('/posts/:id', checkAuth, PostController.remove);
-// app.patch('/posts', PostController.update);
+app.patch('/posts/:id', checkAuth, PostController.update);
 
 app.listen(4444, (err) => {
    if (err) {
