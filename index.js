@@ -1,5 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
+
+import cors from 'cors';
+
 import multer from 'multer';
 
 // import { restart } from 'nodemon';
@@ -28,7 +31,7 @@ const storage = multer.diskStorage({
       cb(null, file.originalname);
    },
 });
-
+app.use(cors());
 const upload = multer({ storage }); // у мультера храниище сделалитз стородж
 
 app.use(express.json()); // чтобы читать джейсон запросы.
