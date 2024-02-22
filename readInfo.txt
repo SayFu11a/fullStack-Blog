@@ -5,10 +5,10 @@ npm install multer - ус биб по загрузке картинок
 
 
 
-npm run start:dev 
+npm run start:dev
 - запуск с автообновлением
 npm run start
 
 git add .
-git commit -m "add authtorization"
+git commit -m "fix getme"
 git push origin master
