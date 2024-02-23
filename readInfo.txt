@@ -10,5 +10,5 @@ npm run start:dev
 npm run start
 
 git add .
-git commit -m "add registration, fix auth, add importFile, writeArticle"
+git commit -m "fix Url"
 git push origin master
