@@ -46,22 +46,24 @@ export const getOne = async (req, res) => {
          {
             returnDocument: 'after',
          },
-      ).then((doc, err) => {
-         if (err) {
-            console.log(err);
-            return res.status(500).json({
-               message: "Can't get article.",
-            });
-         }
+      )
+         .populate('user')
+         .then((doc, err) => {
+            if (err) {
+               console.log(err);
+               return res.status(500).json({
+                  message: "Can't get article.",
+               });
+            }
 
-         if (!doc) {
-            return res.status(404).json({
-               message: 'Article not found.',
-            });
-         }
+            if (!doc) {
+               return res.status(404).json({
+                  message: 'Article not found.',
+               });
+            }
 
-         res.json(doc);
-      });
+            res.json(doc);
+         });
    } catch (err) {
       console.log(err);
       res.status(500).json({
@@ -112,7 +114,7 @@ export const create = async (req, res) => {
       const doc = new PostModel({
          title: req.body.title,
          text: req.body.text,
-         imageIrl: req.body.imageIrl,
+         imageUrl: req.body.imageUrl,
          tags: req.body.tags,
          user: req.userId,
       });
@@ -139,7 +141,7 @@ export const update = async (req, res) => {
          {
             title: req.body.title,
             text: req.body.text,
-            imageIrl: req.body.imageIrl,
+            imageUrl: req.body.imageUrl,
             tags: req.body.tags,
             user: req.userId,
          },
