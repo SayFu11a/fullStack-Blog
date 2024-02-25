@@ -10,5 +10,5 @@ npm run start:dev
 npm run start
 
 git add .
-git commit -m "fix version work"
+git commit -m "deploy"
 git push origin master
