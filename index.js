@@ -15,9 +15,7 @@ import { UserController, PostController } from './controllers/index.js'; // вс
 // import User from './models/User.js';
 
 mongoose
-   .connect(
-      'mongodb+srv://admin1:wwwwww@cluster0.okaofvn.mongodb.net/blog?retryWrites=true&w=majority',
-   )
+   .connect(process.env.MONGODB_URI)
    .then(() => console.log('DB ok'))
    .catch((err) => console.log('DB error', err));
 
@@ -62,7 +60,7 @@ app.patch(
    PostController.update,
 );
 
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
    if (err) {
       return console.log(err);
    }
