@@ -10,5 +10,5 @@ npm run start:dev
 npm run start
 
 git add .
-git commit -m "deploy"
+git commit -m "deploy1232"
 git push origin master

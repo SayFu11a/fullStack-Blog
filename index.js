@@ -1,6 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
 
+import { config } from 'dotenv';
+config(); // не было
+
 import cors from 'cors';
 
 import multer from 'multer';
